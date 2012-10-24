@@ -4,12 +4,12 @@ class CreateTasks < ActiveRecord::Migration
       t.column :user_id, :integer
       t.column :start_time, :datetime
       t.column :end_time, :datetime
-      t.column :date, :date
+      t.column :bill_date_id, :integer
       t.column :title, :string
       t.column :description, :string
       t.column :reference_id, :string
       t.column :duration, :integer
-      t.column :order_no, :integer
+      t.column :position, :integer
       t.column :is_break, :boolean, :default => false
 
       t.timestamps

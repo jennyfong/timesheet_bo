@@ -10,18 +10,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121024150613) do
+ActiveRecord::Schema.define(:version => 20121024161941) do
+
+  create_table "bill_dates", :force => true do |t|
+    t.date     "date"
+    t.boolean  "is_paid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "tasks", :force => true do |t|
     t.integer  "user_id"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.date     "date"
+    t.integer  "bill_date_id"
     t.string   "title"
     t.string   "description"
     t.string   "reference_id"
     t.integer  "duration"
-    t.integer  "order_no"
+    t.integer  "position"
     t.boolean  "is_break",     :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
