@@ -10,8 +10,12 @@
 <%= link_to "Users", users_url %> |
 <%= link_to "Tasks", tasks_url %>
 
-Welcome <%= current_user.first_name %>
-<%= link_to "Logout", session_url(current_user), :method => :delete %>
+<% if signed_in? %>
+    Welcome <%= current_user.first_name %>
+    <%= link_to "Logout", session_url(current_user), :method => :delete %>
+<% end %>
+
+<%= flash %>
 
 <%= yield %>
 

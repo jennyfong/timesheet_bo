@@ -1,7 +1,7 @@
 TimesheetBo::Application.routes.draw do
   get "additional_infos/show"
 
-  resource :home
+  match 'home' => 'home#index'
 
   resource :session
 
@@ -12,6 +12,8 @@ TimesheetBo::Application.routes.draw do
   resources :users do
 
   end
+
+  root :to => "home#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

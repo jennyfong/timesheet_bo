@@ -19,6 +19,7 @@ class TasksController < ApplicationController
     if Task.create(params[:task])
       redirect_to tasks_url(:user_id => params[:task][:user_id], :date => params[:task][:date])
     else
+      flash[:warning] = "There was a problem"
       render tasks_url
     end
 

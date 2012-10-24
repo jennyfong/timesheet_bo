@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
         if user.first_name.blank?
           redirect_to(user_additional_info_path(user))
         else
-          redirect_to(session[:redirect_to] || home_path)
+          redirect_to(session[:redirect_to] || root_path)
         end
       when :failure
         render :action => 'problem'
