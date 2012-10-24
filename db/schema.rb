@@ -35,9 +35,14 @@ ActiveRecord::Schema.define(:version => 20121024161941) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "name"
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "identifier_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "users", ["identifier_url"], :name => "index_users_on_identifier_url"
 
 end

@@ -6,4 +6,10 @@ class Task < ActiveRecord::Base
   validates_presence_of :user
   validates_presence_of :title
 
+  after_create :calculate_duration
+
+  def calculate_duration
+
+  end
+
 end

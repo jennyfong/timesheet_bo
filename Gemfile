@@ -9,6 +9,9 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 
 gem 'acts_as_list'
 
+gem "ruby-openid"
+gem "rack-openid"
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

@@ -1,12 +1,13 @@
 class TasksController < ApplicationController
+  before_filter :ensure_signed_in
+
   def index
-    params[:user_id] = 1
 
-    @date = Date.current
-    @user = User.find(params[:user_id])
-    @tasks = Task.all(:conditions => ["date = ? and user_id =? ", @date, @user], :order => "start_time ASC")
+    @date = BillDate.find_by_date(Date.current)
+    @user = params[:user_id].blank? ? current_user : User.find(params[:user_id])
+    @tasks = Task.all(:conditions => ["bill_date_id = ? and user_id =? ", @date, @user], :order => "start_time ASC")
 
-    @task = Task.new(:user => @user, :date => @date)
+    @task = Task.new(:user => @user, :bill_date => @date)
 
   end
 

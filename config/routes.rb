@@ -1,5 +1,9 @@
 TimesheetBo::Application.routes.draw do
+  get "additional_infos/show"
 
+  resource :home
+
+  resource :session
 
   resources :tasks do
 
