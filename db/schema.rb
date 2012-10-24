@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20121024150613) do
     t.string   "reference_id"
     t.integer  "duration"
     t.integer  "order_no"
+    t.boolean  "is_break",     :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

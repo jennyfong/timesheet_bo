@@ -1,2 +1,39 @@
 <h1>Tasks#index</h1>
-<p>Find me in app/views/tasks/index.html.erb</p>
+
+<%= @date %>
+
+<table>
+  <thead>
+  <tr>
+    <td>Time</td>
+    <td>Title</td>
+    <td>Duration</td>
+  </tr>
+  </thead>
+  <tbody>
+  <% @tasks.each do |task| %>
+      <tr>
+        <td> <%= task.start_time %></td>
+        <td>  <%= task.title %></td>
+        <td><%= task.duration %></td>
+      </tr>
+
+
+  <% end %>
+  </tbody>
+</table>
+
+
+<%= form_for @task, :as => :task, :html => {:method => :post} do |f| %>
+    <%= f.hidden_field :user_id %>
+    <%= f.hidden_field :date %>
+    <%= f.label :start_time %>
+    <%= f.text_field :start_time, :default => DateTime.current %><br/>
+    <%= f.label :reference_id %>
+    <%= f.text_field :reference_id %><br/>
+    <%= f.label :title %>
+    <%= f.text_field :title %><br/>
+    <%= f.label :description %>
+    <%= f.text_area :description, :rows => 2 %><br/>
+    <%= f.submit "create" %>
+<% end %>

@@ -10,6 +10,7 @@ class CreateTasks < ActiveRecord::Migration
       t.column :reference_id, :string
       t.column :duration, :integer
       t.column :order_no, :integer
+      t.column :is_break, :boolean, :default => false
 
       t.timestamps
     end
