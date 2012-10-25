@@ -14,14 +14,15 @@
   <tbody>
   <% @time_logs.each do |log| %>
       <tr class="<%= cycle("odd", "even")%>">
-        <td><%= log.start_time %></td>
+        <td><%= log.start_time.strftime("%H:%M") %></td>
         <td><%= log.title %></td>
-        <td><%= log.duration %></td>
+        <td><%= log.duration.blank? ? '' : log.duration  %></td>
         <td><%= link_to 'Delete', time_log_path(log), :method => :delete %></td>
       </tr>
   <% end %>
   </tbody>
 </table>
+<%= @date.total_hours %>
 
 
 <%= form_for @time_log, :as => :time_log, :html => {:method => :post} do |f| %>

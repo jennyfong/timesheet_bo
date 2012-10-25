@@ -1,11 +1,26 @@
- <%= f.hidden_field :user_id %>
-    <%= f.hidden_field :bill_date_id %>
-    <%= f.label :start_time %>
-    <%= f.text_field :start_time, :default => DateTime.current %><br/>
-    <%= f.label :reference_id %>
-    <%= f.text_field :reference_id %><br/>
-    <%= f.label :title %>
-    <%= f.text_field :title %><br/>
-    <%= f.label :description %>
-    <%= f.text_area :description, :rows => 2 %><br/>
-    <%= f.submit "create" %>
+<%= f.hidden_field :user_id %>
+<%= f.hidden_field :bill_date_id %>
+<%= f.label :start_time %>
+
+<%= select_tag "hours", options_for_select(hours_interval, Time.current.hour) %>:
+<%= select_tag "minutes", options_for_select(minute_interval, Time.current.min) %>
+<br/>
+
+
+
+<div style="float:left">
+
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <br/>
+  <%= f.label :description %>
+  <%= f.text_area :description, :rows => 2 %>
+
+</div>
+<div style='float:right'>
+  <%= f.label :reference_id %>
+  <%= f.text_field :reference_id %>
+
+</div>
+<br/>
+<%= f.submit "create" %>
