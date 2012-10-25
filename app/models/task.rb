@@ -5,6 +5,7 @@ class Task < ActiveRecord::Base
   validates_presence_of :start_time
   validates_presence_of :user
   validates_presence_of :title
+  validates_presence_of :bill_date
 
   after_create :calculate_duration
 
