@@ -1,4 +1,4 @@
-class Task < ActiveRecord::Base
+class TimeLog < ActiveRecord::Base
   belongs_to :user
   belongs_to :bill_date
 
@@ -8,6 +8,8 @@ class Task < ActiveRecord::Base
   validates_presence_of :bill_date
 
   after_create :calculate_duration
+
+  validates_uniqueness_of :start_time, :scope => :bill_date
 
   def calculate_duration
 

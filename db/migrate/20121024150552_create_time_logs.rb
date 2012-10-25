@@ -1,6 +1,6 @@
-class CreateTasks < ActiveRecord::Migration
+class CreateTimeLogs < ActiveRecord::Migration
   def self.up
-    create_table :tasks do |t|
+    create_table :time_logs do |t|
       t.column :user_id, :integer
       t.column :start_time, :datetime
       t.column :end_time, :datetime
@@ -17,6 +17,6 @@ class CreateTasks < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :tasks
+    drop_table :time_logs
   end
 end

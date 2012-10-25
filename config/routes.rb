@@ -5,7 +5,7 @@ TimesheetBo::Application.routes.draw do
 
   resource :session
 
-  resources :tasks do
+  resources :time_logs do
 
   end
 

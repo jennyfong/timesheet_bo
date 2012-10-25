@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(:version => 20121024161941) do
     t.datetime "updated_at"
   end
 
-  create_table "tasks", :force => true do |t|
+  create_table "time_logs", :force => true do |t|
     t.integer  "user_id"
     t.datetime "start_time"
     t.datetime "end_time"

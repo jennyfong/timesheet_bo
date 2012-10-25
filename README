@@ -1,1 +1,19 @@
 Timesheet Bo
+
+This is a personal project that I have been playing around for a few years, it is mainly for personal use at the moment,
+and I use it to test any new technologies. Timesheet Bo (Bo is from the cantonese word notebook)
+allows you to keep track of your working hours. It allows you to export the timesheets to produce invoices and reports.
+
+Main functionalities:
+
+ - Sign in using google accounts
+ - Create tasks against a bill date -tasks connected to the day can be after mid-night
+ - Calculate duration
+
+
+Road Map
+- Redmine integration
+ Connect to redmine to retrieve ticket details and generate report of hours spent on each ticket - potentially push this information back o
+ to the redmine ticket.
+
+-
