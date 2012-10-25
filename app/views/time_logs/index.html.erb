@@ -2,10 +2,7 @@
 
 <%= @date.date %>
 
-
-<%= @time_log.bill_date.date %>
-
-<table>
+<table class="timesheet">
   <thead>
   <tr>
     <td>Time</td>
@@ -16,14 +13,12 @@
   </thead>
   <tbody>
   <% @time_logs.each do |log| %>
-      <tr>
+      <tr class="<%= cycle("odd", "even")%>">
         <td><%= log.start_time %></td>
         <td><%= log.title %></td>
         <td><%= log.duration %></td>
         <td><%= link_to 'Delete', time_log_path(log), :method => :delete %></td>
       </tr>
-
-
   <% end %>
   </tbody>
 </table>

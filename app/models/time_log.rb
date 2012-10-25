@@ -9,7 +9,7 @@ class TimeLog < ActiveRecord::Base
 
   after_create :calculate_duration
 
-  validates_uniqueness_of :start_time, :scope => :bill_date
+  validates_uniqueness_of :start_time, :scope => :bill_date_id
 
   def calculate_duration
 

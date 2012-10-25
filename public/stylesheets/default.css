@@ -1,0 +1,8 @@
+.timesheet table{
+    width: 500px
+
+}
+
+.timesheet tr .even{
+    background-color:gray;
+}

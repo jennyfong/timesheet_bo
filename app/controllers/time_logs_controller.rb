@@ -19,7 +19,7 @@ class TimeLogsController < ApplicationController
 
   def create
     if TimeLog.create(params[:time_log])
-      redirect_to time_logs_path(:user_id => params[:time_log][:user_id], :bill_date => params[:time_log][:date])
+      redirect_to time_logs_path(:user_id => params[:time_log][:user_id], :bill_date => params[:time_log][:bill_date])
     else
       flash[:warning] = "There was a problem"
       render time_logs_path
