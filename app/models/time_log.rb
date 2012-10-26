@@ -49,9 +49,7 @@ class TimeLog < ActiveRecord::Base
   end
 
   def update_previous
-    logger.info "******** update previous"
     unless self.higher_item.blank?
-      logger.info "there's a higher_item"
       higher_item = self.higher_item
       higher_item.end_time = self.lower_item ? self.lower_item.start_time : nil
       higher_item.calculate_duration
