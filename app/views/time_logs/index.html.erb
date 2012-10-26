@@ -1,5 +1,9 @@
 <h1>Tasks#index</h1>
 
+<% @bill_dates.each do |bill_date| %>
+    <%= link_to bill_date.date, time_logs_path(:date => bill_date.date ) %><br/>
+<% end %>
+
 <%= @date.date %>
 
 <table class="timesheet">
@@ -13,10 +17,10 @@
   </thead>
   <tbody>
   <% @time_logs.each do |log| %>
-      <tr class="<%= cycle("odd", "even")%>">
+      <tr class="<%= cycle("odd", "even") %>">
         <td><%= log.start_time.strftime("%H:%M") %></td>
         <td><%= log.title %></td>
-        <td><%= log.duration.blank? ? '' : log.duration  %></td>
+        <td><%= log.duration.blank? ? '' : log.duration %></td>
         <td><%= link_to 'Delete', time_log_path(log), :method => :delete %></td>
       </tr>
   <% end %>

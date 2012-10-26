@@ -4,8 +4,9 @@ class TimeLogsController < ApplicationController
   def index
     params[:user_id] = 1
     @user = params[:user_id].blank? ? current_user : User.find(params[:user_id])
-    @date = BillDate.find_by_date(Date.current)
-    @date ||= BillDate.create(:date => Date.current)
+    @bill_dates = BillDate.all
+    @date = BillDate.find_by_date(params[:date]) if params[:date]
+    @date ||= BillDate.find_or_create_by_date(:date => Date.current)
 
     @time_logs = TimeLog.all(:conditions => ["bill_date_id = ? and user_id =? ", @date, @user], :order => "start_time ASC")
 
@@ -42,6 +43,10 @@ class TimeLogsController < ApplicationController
     date = log.bill_date
     log.destroy
     redirect_to time_logs_path(:user_id => user, :bill_date => date)
+  end
+
+  def finish
+
   end
 
 end

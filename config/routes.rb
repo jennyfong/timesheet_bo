@@ -6,6 +6,9 @@ TimesheetBo::Application.routes.draw do
   resource :session
 
   resources :time_logs do
+    member do
+
+    end
 
   end
 
