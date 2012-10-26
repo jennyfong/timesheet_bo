@@ -22,4 +22,4 @@
 
 </div>
 <br/>
-<%= f.submit "create" %>
+<%= f.submit @time_log.valid? ? "Update" : "Create" %>

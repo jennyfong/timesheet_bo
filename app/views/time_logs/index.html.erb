@@ -23,7 +23,10 @@
         <td><%= log.start_time.strftime("%H:%M") %></td>
         <td><%= log.title %></td>
         <td><%= log.duration.blank? ? '' : humanize_time(log.duration) %></td>
-        <td><%= link_to 'Delete', time_log_path(log), :method => :delete %></td>
+        <td>
+          <%= link_to 'Edit', edit_time_log_path(log), :method => :get %>
+          <%= link_to 'Delete', time_log_path(log), :method => :delete %>
+        </td>
       </tr>
   <% end %>
   </tbody>
@@ -34,7 +37,9 @@ Finish at: <%= @date.finish_at %><br/>
 Total : <%= humanize_time(@date.total_hours) %>
 
 
-<%= form_for @time_log, :as => :time_log, :html => {:method => :post} do |f| %>
+
+<%= form_for @time_log, :as => :time_log, :html => {:method => (@time_log.valid? ? :put : :post)} do |f| %>
+    <%= hidden_field_tag :bill_date_id, @date.id %>
     <%= render :partial => 'form', :locals => {:f => f} %>
 
 <% end %>

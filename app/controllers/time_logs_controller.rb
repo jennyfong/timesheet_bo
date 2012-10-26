@@ -10,12 +10,21 @@ class TimeLogsController < ApplicationController
 
     @time_logs = @date.time_logs.order("start_time ASC")
 
-    @time_log = TimeLog.new(:bill_date => @date)
+    if params[:time_log_id]
+      @time_log = TimeLog.find(params[:time_log_id])
+    else
+      @time_log = TimeLog.new(:bill_date => @date)
+    end
+
 
   end
 
   def new
 
+  end
+
+  def edit
+     redirect_to time_logs_path(params[:bill_date_id], :time_log_id => params[:id])
   end
 
   def create
