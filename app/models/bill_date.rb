@@ -4,7 +4,7 @@ class BillDate < ActiveRecord::Base
   validates_uniqueness_of :date, :scope => :user_id
 
   def reorder
-    position = 0
+    position = 1
     self.time_logs.update_all(:position => 0)
     self.time_logs.order('start_time ASC').each do |time_log|
       time_log.position = position

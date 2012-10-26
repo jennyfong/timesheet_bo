@@ -24,25 +24,22 @@ class TimeLogsController < ApplicationController
     @time_log = TimeLog.create(params[:time_log])
 
     if @time_log.valid?
-      redirect_to time_logs_path(:user_id => params[:time_log][:user_id], :bill_date => params[:time_log][:bill_date])
+      redirect_to time_logs_path(:bill_date => params[:time_log][:bill_date])
     else
       flash[:warning] = "There was a problem #{@time_log.errors.full_messages}"
       @date = @time_log.bill_date
-      @time_logs = @date.time_logs.find_all_by_user_id(@time_log.user_id)
+      @bill_dates = BillDate.all
+      @time_logs = @date.time_logs
       render :action => :index
     end
 
   end
 
   def destroy
-
-
     log = TimeLog.find(params[:id])
-
-    user = log.user
     date = log.bill_date
     log.destroy
-    redirect_to time_logs_path(:user_id => user, :bill_date => date)
+    redirect_to time_logs_path(:bill_date => date)
   end
 
   def finish

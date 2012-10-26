@@ -1,8 +1,8 @@
 <%= f.hidden_field :bill_date_id %>
 <%= f.label :start_time %>
 
-<%= select_tag "hours", options_for_select(hours_interval, Time.current.hour) %>:
-<%= select_tag "minutes", options_for_select(minute_interval, Time.current.min) %>
+<%= select_tag "hours", options_for_select(hours_interval,"%02d"% Time.current.hour) %>:
+<%= select_tag "minutes", options_for_select(minute_interval,"%02d"% Time.current.min) %>
 <br/>
 
 

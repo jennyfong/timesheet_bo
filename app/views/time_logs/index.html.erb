@@ -9,6 +9,7 @@
 <table class="timesheet">
   <thead>
   <tr>
+    <td>No.</td>
     <td>Time</td>
     <td>Title</td>
     <td>Duration</td>
@@ -18,6 +19,7 @@
   <tbody>
   <% @time_logs.each do |log| %>
       <tr class="<%= cycle("odd", "even") %>">
+        <td><%= log.position %></td>
         <td><%= log.start_time.strftime("%H:%M") %></td>
         <td><%= log.title %></td>
         <td><%= log.duration.blank? ? '' : log.duration %></td>
