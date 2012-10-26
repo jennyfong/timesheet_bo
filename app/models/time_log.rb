@@ -13,8 +13,12 @@ class TimeLog < ActiveRecord::Base
 
   validates_uniqueness_of :start_time, :scope => :bill_date_id
 
+  before_destroy :update_previous
+
+
   def update_duration
     self.bill_date.reorder
+    self.reload
 
     lower_time_log = self.lower_item
     higher_item = self.higher_item
@@ -35,10 +39,24 @@ class TimeLog < ActiveRecord::Base
   end
 
 
-
   def calculate_duration
-    self.duration = self.end_time - self.start_time
+    if self.end_time && self.start_time
+      self.duration = self.end_time - self.start_time
+    else
+      self.duration = nil
+    end
     self.save
+  end
+
+  def update_previous
+    logger.info "******** update previous"
+    unless self.higher_item.blank?
+      logger.info "there's a higher_item"
+      higher_item = self.higher_item
+      higher_item.end_time = self.lower_item ? self.lower_item.start_time : nil
+      higher_item.calculate_duration
+      higher_item.save
+    end
   end
 
 

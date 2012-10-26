@@ -12,12 +12,13 @@ class BillDate < ActiveRecord::Base
       position += 1
 
     end
+    self.time_logs.reload
   end
 
-  def calcuate_duration
+  def calculate_duration
     self.reorder
     self.time_logs.each do |time_log|
-      time_log.calculate_duration
+      time_log.update_duration
     end
   end
 
