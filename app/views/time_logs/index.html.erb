@@ -28,6 +28,9 @@
   <% end %>
   </tbody>
 </table>
+<%= button_to "Finish Now",  finish_time_log_path(@date, :time => Time.current), :method => :post %>
+
+Finish at: <%= @date.finish_at %><br/>
 Total : <%= humanize_time(@date.total_hours) %>
 
 

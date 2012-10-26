@@ -7,6 +7,7 @@ TimesheetBo::Application.routes.draw do
 
   resources :time_logs do
     member do
+      post 'finish'
 
     end
 

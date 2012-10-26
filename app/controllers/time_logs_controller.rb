@@ -43,6 +43,13 @@ class TimeLogsController < ApplicationController
   end
 
   def finish
+    bill_date = BillDate.find(params[:id])
+    last_log = bill_date.time_logs.last
+    last_log.end_time = params[:time]
+    last_log.save
+    last_log.update_duration
+
+    redirect_to time_logs_path(:bill_date => bill_date)
 
   end
 
