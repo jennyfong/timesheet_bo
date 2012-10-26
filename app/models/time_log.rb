@@ -1,5 +1,5 @@
 class TimeLog < ActiveRecord::Base
-  belongs_to :user
+
   belongs_to :bill_date
 
   acts_as_list :scope => :bill_date

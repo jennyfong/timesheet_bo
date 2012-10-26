@@ -1,7 +1,6 @@
 class CreateTimeLogs < ActiveRecord::Migration
   def self.up
     create_table :time_logs do |t|
-      t.column :user_id, :integer
       t.column :start_time, :datetime
       t.column :end_time, :datetime
       t.column :bill_date_id, :integer

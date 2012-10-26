@@ -8,9 +8,9 @@ class TimeLogsController < ApplicationController
     @date = BillDate.find_by_date(params[:date]) if params[:date]
     @date ||= BillDate.find_or_create_by_date(:date => Date.current)
 
-    @time_logs = TimeLog.all(:conditions => ["bill_date_id = ? and user_id =? ", @date, @user], :order => "start_time ASC")
+    @time_logs = @date.time_logs.order("start_time ASC")
 
-    @time_log = TimeLog.new(:user => @user, :bill_date => @date)
+    @time_log = TimeLog.new(:bill_date => @date)
 
   end
 

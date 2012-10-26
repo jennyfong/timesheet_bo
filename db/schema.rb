@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(:version => 20121024161941) do
 
   create_table "bill_dates", :force => true do |t|
+    t.integer  "user_id"
     t.date     "date"
     t.boolean  "is_paid"
     t.datetime "created_at"
@@ -20,7 +21,6 @@ ActiveRecord::Schema.define(:version => 20121024161941) do
   end
 
   create_table "time_logs", :force => true do |t|
-    t.integer  "user_id"
     t.datetime "start_time"
     t.datetime "end_time"
     t.integer  "bill_date_id"

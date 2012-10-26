@@ -1,6 +1,8 @@
 class BillDate < ActiveRecord::Base
   has_many :time_logs, :order => "position"
 
+  validates_uniqueness_of :date, :scope => :user_id
+
   def reorder
     position = 0
     self.time_logs.update_all(:position => 0)
