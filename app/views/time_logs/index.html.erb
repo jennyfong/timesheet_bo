@@ -22,7 +22,7 @@
         <td><%= log.position %></td>
         <td><%= log.start_time.strftime("%H:%M") %></td>
         <td><%= log.title %></td>
-        <td><%= log.duration.blank? ? '' : humanize_time(log.duration) %></td>
+        <td><%= log.duration.blank? ? '' : distance_of_time_in_words(log.start_time, log.end_time, true) %></td>
         <td>
           <%= link_to 'Edit', edit_time_log_path(log), :method => :get %>
           <%= link_to 'Delete', time_log_path(log), :method => :delete %>
@@ -37,14 +37,14 @@
 Finish at: <%= @date.finished_at %>
 
 <% form_tag finish_time_log_path(@date), :method => :post do %>
- <%= select_tag "hours", options_for_select(hours_interval, default_hour(@date.finished_at)) %>:
-<%= select_tag "minutes", options_for_select(hours_interval, default_minute(@date.finished_at)) %>
+   <%=  select_hour(Time.now, :field_name => :hours)  %>
+    <%=  select_minute(Time.now, :field_name => :hours)  %>
 
 
 <%= submit_tag "Finish Now" %>
 <% end %>
 <br/>
-Total : <%= humanize_time(@date.total_hours) %>
+Total : <%= distance_of_time_in_words(@time_logs.first.start_time, @time_logs.last.end_time, true) %>
 
 
 
