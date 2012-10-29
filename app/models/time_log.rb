@@ -10,7 +10,6 @@ class TimeLog < ActiveRecord::Base
 
   after_create :update_duration
 
-
   validates_uniqueness_of :start_time, :scope => :bill_date_id
 
   before_destroy :update_previous

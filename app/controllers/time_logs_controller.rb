@@ -27,6 +27,17 @@ class TimeLogsController < ApplicationController
      redirect_to time_logs_path(params[:bill_date_id], :time_log_id => params[:id])
   end
 
+  def update
+    @time_log = TimeLog.find(params[:id])
+    params[:time_log][:start_time] = params[:hours] + ':' + params[:minutes]
+    if @time_log.update_attributes(params[:time_log])
+      @time_log.update_duration
+      redirect_to time_logs_path(params[:bill_date_id])
+    else
+      flash[:warning] = "Update unsuccessful"
+    end
+  end
+
   def create
 
     params[:time_log][:start_time] ="#{params[:hours]}:#{params[:minutes]}"
