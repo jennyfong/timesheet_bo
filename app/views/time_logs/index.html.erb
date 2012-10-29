@@ -1,9 +1,9 @@
 <h1><%= @date.date %></h1>
 
-<table class="timesheet">
+<div class="timesheet" >
+<table cellspacing="0" cellpadding="0">
   <thead>
   <tr>
-    <td>No.</td>
     <td>Time</td>
     <td>Title</td>
     <td>Duration</td>
@@ -13,7 +13,6 @@
   <tbody>
   <% @time_logs.each do |log| %>
       <tr class="<%= cycle("odd", "even") %>">
-        <td><%= log.position %></td>
         <td><%= log.start_time.strftime("%H:%M") %></td>
         <td><%= log.title %>
           <br/>
@@ -28,10 +27,11 @@
 
   <% end %>
   <tr>
-    <td colspan="5"><%= !@date.finished_at.blank? ? "Finished at: #{@date.finished_at}" : "Updated at: #{Time.current.strftime("%H:%M")}"  %></td>
+    <td colspan="5"><br/><%= !@date.finished_at.blank? ? "Finished at: #{@date.finished_at}" : "Updated at: #{Time.current.strftime("%H:%M")}"  %></td>
   </tr>
   </tbody>
 </table>
+  </div>
 
 <%= form_for @time_log, :as => :time_log, :html => {:method => (@time_log.valid? ? :put : :post), :class => 'report'} do |f| %>
     <%= hidden_field_tag :bill_date_id, @date.id %>

@@ -1,7 +1,11 @@
+
+
 #main_wrapper{
     width:1000px;
     margin:0 auto;
+    font-size:0.9em;
 }
+
 
 #left_panel{
     float:left;
@@ -15,14 +19,23 @@
 }
 
 
-
-table.timesheet {
-    width: 800px;
+.timesheet{
+    height: 300px;
     border:1px solid gray;
+
+}
+
+.timesheet table {
+    width: 800px;
+
     padding:1em;
     margin:0 0 1em 0;
 
 
+}
+
+.timesheet tr{
+    height:1em;
 }
 
 
