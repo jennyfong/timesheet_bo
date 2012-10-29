@@ -65,7 +65,7 @@ class TimeLogsController < ApplicationController
   def finish
     bill_date = BillDate.find(params[:id])
     last_log = bill_date.time_logs.last
-    last_log.end_time = params[:time]
+    last_log.end_time = params[:hours] + ":" + params[:minutes]
     last_log.save
     last_log.update_duration
 

@@ -15,6 +15,8 @@ class TimeLog < ActiveRecord::Base
   before_destroy :update_previous
 
 
+
+
   def update_duration
     self.bill_date.reorder
     self.reload

@@ -31,9 +31,19 @@
   <% end %>
   </tbody>
 </table>
-<%= button_to "Finish Now",  finish_time_log_path(@date, :time => Time.current), :method => :post %>
 
-Finish at: <%= @date.finish_at %><br/>
+
+
+Finish at: <%= @date.finished_at %>
+
+<% form_tag finish_time_log_path(@date), :method => :post do %>
+ <%= select_tag "hours", options_for_select(hours_interval, default_hour(@date.finished_at)) %>:
+<%= select_tag "minutes", options_for_select(hours_interval, default_minute(@date.finished_at)) %>
+
+
+<%= submit_tag "Finish Now" %>
+<% end %>
+<br/>
 Total : <%= humanize_time(@date.total_hours) %>
 
 

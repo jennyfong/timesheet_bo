@@ -26,7 +26,7 @@ class BillDate < ActiveRecord::Base
     self.time_logs.select { |i| !i.is_break? }.collect { |i| i.duration.to_i }.sum
   end
 
-  def finish_at
+  def finished_at
     (self.time_logs.last.blank? || self.time_logs.last.end_time.blank?) ? '' : self.time_logs.last.end_time.strftime("%H:%S")
   end
 
