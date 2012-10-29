@@ -1,8 +1,59 @@
-.timesheet table{
-    width: 500px
+#main_wrapper{
+    width:1000px;
+    margin:0 auto;
+}
+
+#left_panel{
+    float:left;
+    width: 200px;
+}
+
+#right_panel{
+    float:left;
+    width:800px;
+    padding:0px;
+}
+
+
+
+table.timesheet {
+    width: 800px;
+    border:1px solid gray;
+    padding:1em;
+    margin:0 0 1em 0;
+
 
 }
 
-.timesheet tr .even{
-    background-color:gray;
+
+.timesheet thead{
+    font-weight: bold;
+}
+
+.timesheet .description{
+    font-size: 0.75em;
+    color: #666666;
+}
+
+.timesheet tr, .timesheet td{
+    margin:0;
+}
+
+.timesheet  tr.even{
+    background-color: #cccccc;
+}
+
+
+.copyright{
+    clear:both;
+    font-size: 0.75em;
+    width:16em;
+    margin:0 auto;
+    padding:1em;
+}
+
+
+.report label{
+    width: 10em;
+    float:left;
 }

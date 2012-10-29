@@ -10,14 +10,42 @@
 <%= link_to "Users", users_url %> |
 <%= link_to "Timesheet", time_logs_url %>
 
-<% if signed_in? %>
-    Welcome <%= current_user.first_name %>
-    <%= link_to "Logout", session_url(current_user), :method => :delete %>
+
+<% for name in [:error, :warning, :notice, :info, :trace] %>
+    <% if flash[name] %>
+        <div class="<%= "flash_#{name} message" %>">
+          <strong><%= name.to_s.capitalize %>:</strong>
+          <%= flash[name] %>
+        </div>
+        <% flash[name] = nil unless Rails.env.test? %>
+    <% end %>
 <% end %>
 
-<%= flash %>
 
-<%= yield %>
+<div id='main_wrapper'>
+  <% if signed_in? %>
+      Welcome <%= current_user.first_name %>
+      <%= link_to "Logout", session_url(current_user), :method => :delete %>
+  <% end %>
+
+  <br style='clear:both'/>
+
+  <div id='left_panel'>
+    <%= yield :left_panel %>
+  </div>
+
+  <div id='right_panel'>
+
+    <%= yield :right_panel %>
+    <%= yield %>
+  </div>
+
+</div>
+
+
+<div class='copyright'>
+  Jenny Fong All Rights Reserved
+</div>
 
 </body>
 </html>

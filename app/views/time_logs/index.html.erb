@@ -1,10 +1,4 @@
-<h1>Tasks#index</h1>
-
-<% @bill_dates.each do |bill_date| %>
-    <%= link_to bill_date.date, time_logs_path(:date => bill_date.date ) %><br/>
-<% end %>
-
-<%= @date.date %>
+<h1><%= @date.date %></h1>
 
 <table class="timesheet">
   <thead>
@@ -21,35 +15,49 @@
       <tr class="<%= cycle("odd", "even") %>">
         <td><%= log.position %></td>
         <td><%= log.start_time.strftime("%H:%M") %></td>
-        <td><%= log.title %></td>
+        <td><%= log.title %>
+          <br/>
+          <div class='description'><%= log.description %></div>
+        </td>
         <td><%= log.duration.blank? ? '' : distance_of_time_in_words(log.start_time, log.end_time, true) %></td>
         <td>
           <%= link_to 'Edit', edit_time_log_path(log), :method => :get %>
           <%= link_to 'Delete', time_log_path(log), :method => :delete %>
         </td>
       </tr>
+
   <% end %>
+  <tr>
+    <td colspan="5"> Finished at: <%= @date.finished_at %></td>
+  </tr>
   </tbody>
 </table>
 
 
 
-Finish at: <%= @date.finished_at %>
-
-<% form_tag finish_time_log_path(@date), :method => :post do %>
-   <%=  select_hour(Time.now, :field_name => :hours)  %>
-    <%=  select_minute(Time.now, :field_name => :hours)  %>
-
-
-<%= submit_tag "Finish Now" %>
-<% end %>
-<br/>
-Total : <%= distance_of_time_in_words(@time_logs.first.start_time, @time_logs.last.end_time, true) %>
-
-
-
-<%= form_for @time_log, :as => :time_log, :html => {:method => (@time_log.valid? ? :put : :post)} do |f| %>
+<%= form_for @time_log, :as => :time_log, :html => {:method => (@time_log.valid? ? :put : :post), :class => 'report'} do |f| %>
     <%= hidden_field_tag :bill_date_id, @date.id %>
     <%= render :partial => 'form', :locals => {:f => f} %>
 
+<% end %>
+
+
+
+<% content_for :left_panel do %>
+    <% @bill_dates.each do |bill_date| %>
+        <%= link_to bill_date.date, time_logs_path(:date => bill_date.date) %><br/>
+    <% end %>
+    <br/>
+
+
+
+    <% form_tag finish_time_log_path(@date), :method => :post do %>
+        <%= select_hour(Time.now, :field_name => :hours) %>
+        <%= select_minute(Time.now, :field_name => :hours) %>
+
+
+        <%= submit_tag "Finish Now" %>
+    <% end %>
+    <br/>
+    Total : <%= distance_of_time_in_words(@time_logs.first.start_time, @time_logs.last.end_time, true) %>
 <% end %>
