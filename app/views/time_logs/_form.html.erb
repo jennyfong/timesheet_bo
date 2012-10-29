@@ -1,9 +1,9 @@
 <%= f.hidden_field :bill_date_id %>
 <%= f.label :start_time %>
 
-<%=  select_hour(@time_log.start_time, :field_name => :hours)  %>
+<%=  select_hour(@time_log.new_record? ? Time.current : @time_log.start_time)  %>
 
-<%=  select_minute(@time_log.start_time, :field_name => :minute)  %>
+<%=  select_minute(@time_log.new_record? ? Time.current : @time_log.start_time)  %>
 
 <br/>
 

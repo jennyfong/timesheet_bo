@@ -29,7 +29,7 @@ class TimeLogsController < ApplicationController
 
   def update
     @time_log = TimeLog.find(params[:id])
-    params[:time_log][:start_time] = params[:hours] + ':' + params[:minutes]
+    params[:time_log][:start_time] = params[:date][:hour] + ':' + params[:date][:minute]
     if @time_log.update_attributes(params[:time_log])
       @time_log.update_duration
       redirect_to time_logs_path(params[:bill_date_id])
@@ -40,7 +40,7 @@ class TimeLogsController < ApplicationController
 
   def create
 
-    params[:time_log][:start_time] ="#{params[:hours]}:#{params[:minutes]}"
+    params[:time_log][:start_time] ="#{params[:date][:hour]}:#{params[:date][:minute]}"
     @time_log = TimeLog.create(params[:time_log])
 
     if @time_log.valid?
@@ -65,7 +65,7 @@ class TimeLogsController < ApplicationController
   def finish
     bill_date = BillDate.find(params[:id])
     last_log = bill_date.time_logs.last
-    last_log.end_time = params[:hours] + ":" + params[:minutes]
+    last_log.end_time = params[:date][:hour] + ":" + params[:date][:minute]
     last_log.save
     last_log.update_duration
 

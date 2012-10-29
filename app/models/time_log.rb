@@ -14,8 +14,14 @@ class TimeLog < ActiveRecord::Base
 
   before_destroy :update_previous
 
+  validate :end_time_before_start_time, :on => :update
 
 
+  def end_time_before_start_time
+    unless self.end_time.blank? or (self.end_time > self.start_time)
+      return false
+    end
+  end
 
   def update_duration
     self.bill_date.reorder

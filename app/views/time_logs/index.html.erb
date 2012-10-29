@@ -28,20 +28,15 @@
 
   <% end %>
   <tr>
-    <td colspan="5"> Finished at: <%= @date.finished_at %></td>
+    <td colspan="5"><%= !@date.finished_at.blank? ? "Finished at: #{@date.finished_at}" : "Updated at: #{Time.current.strftime("%H:%M")}"  %></td>
   </tr>
   </tbody>
 </table>
 
-
-
 <%= form_for @time_log, :as => :time_log, :html => {:method => (@time_log.valid? ? :put : :post), :class => 'report'} do |f| %>
     <%= hidden_field_tag :bill_date_id, @date.id %>
     <%= render :partial => 'form', :locals => {:f => f} %>
-
 <% end %>
-
-
 
 <% content_for :left_panel do %>
     <% @bill_dates.each do |bill_date| %>
@@ -49,15 +44,12 @@
     <% end %>
     <br/>
 
-
-
     <% form_tag finish_time_log_path(@date), :method => :post do %>
-        <%= select_hour(Time.now, :field_name => :hours) %>
-        <%= select_minute(Time.now, :field_name => :hours) %>
-
+        <%= select_hour(Time.now) %>
+        <%= select_minute(Time.now) %>
 
         <%= submit_tag "Finish Now" %>
     <% end %>
     <br/>
-    Total : <%= distance_of_time_in_words(@time_logs.first.start_time, @time_logs.last.end_time, true) %>
+    Total : <%= distance_of_time_in_words(@time_logs.first.start_time, @time_logs.last.end_time ? @time_logs.last.end_time : Time.current, true) %>
 <% end %>
