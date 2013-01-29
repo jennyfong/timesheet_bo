@@ -51,5 +51,5 @@
         <%= submit_tag "Finish Now" %>
     <% end %>
     <br/>
-    Total : <%= distance_of_time_in_words(@time_logs.first.start_time, @time_logs.last.end_time ? @time_logs.last.end_time : Time.current, true) %>
+    Total : <%= distance_of_time_in_words(@time_logs.first.start_time, @time_logs.last.end_time ? @time_logs.last.end_time : Time.current, true) if @time_logs.size > 0 %>
 <% end %>
