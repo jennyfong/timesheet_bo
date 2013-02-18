@@ -11,6 +11,8 @@ gem 'acts_as_list'
 
 gem "ruby-openid"
 gem "rack-openid"
+gem 'mysql2'
+gem 'activerecord-mysql2-adapter'
 
 # Use unicorn as the web server
 # gem 'unicorn'
