@@ -7,6 +7,7 @@
     <td>Time</td>
     <td>Title</td>
     <td>Duration</td>
+    <td>Is Break?</td>
     <td>Actions</td>
   </tr>
   </thead>
@@ -19,6 +20,7 @@
           <div class='description'><%= log.description %></div>
         </td>
         <td><%= log.duration.blank? ? '' : distance_of_time_in_words(log.start_time, log.end_time, true) %></td>
+        <td><%=log.is_break? ? 'Yes' : 'No' %></td>
         <td>
           <%= link_to 'Edit', edit_time_log_path(log), :method => :get %>
           <%= link_to 'Delete', time_log_path(log), :method => :delete %>
@@ -51,5 +53,5 @@
         <%= submit_tag "Finish Now" %>
     <% end %>
     <br/>
-    Total : <%= distance_of_time_in_words(@time_logs.first.start_time, @time_logs.last.end_time ? @time_logs.last.end_time : Time.current, true) if @time_logs.size >= 2%>
+    Total : <%= @date.total_hours if @date %>
 <% end %>
