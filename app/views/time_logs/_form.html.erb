@@ -1,27 +1,26 @@
 <%= f.hidden_field :bill_date_id %>
 <%= f.label :start_time %>
 
-<%=  select_hour(@time_log.new_record? ? Time.current : @time_log.start_time)  %>
+<%= select_hour(@time_log.new_record? ? Time.current : @time_log.start_time) %>
 
-<%=  select_minute(@time_log.new_record? ? Time.current : @time_log.start_time)  %>
+<%= select_minute(@time_log.new_record? ? Time.current : @time_log.start_time) %>
 
 <br/>
-
-
-
-<div style="float:left">
-
+<p>
   <%= f.label :title %>
   <%= f.text_field :title %>
-  <br/>
+</p>
+<p>
   <%= f.label :description %>
   <%= f.text_area :description, :rows => 2 %>
-
-</div>
-<div style='float:right'>
+</p>
+<p>
   <%= f.label :reference_id %>
   <%= f.text_field :reference_id %>
-
-</div>
+</p>
+<p>
+  <%= f.label :is_break %>
+  <%= f.check_box :is_break %>
+</p>
 <br/>
 <%= f.submit @time_log.valid? ? "Update" : "Create" %>

@@ -46,6 +46,7 @@ class TimeLog < ActiveRecord::Base
   end
 
 
+
   def calculate_duration
     if self.end_time && self.start_time
       self.duration = self.end_time - self.start_time
