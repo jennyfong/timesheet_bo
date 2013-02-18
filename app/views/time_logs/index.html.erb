@@ -1,4 +1,4 @@
-<h1><%= @date.date %></h1>
+<h1><%= @date.date.to_time.strftime("%d %B, %Y (%A)") %> </h1>
 
 <div class="timesheet" >
 <table cellspacing="0" cellpadding="0">
@@ -53,5 +53,5 @@
         <%= submit_tag "Finish Now" %>
     <% end %>
     <br/>
-    Total : <%= @date.total_hours if @date %>
+    Total : <%= distance_of_time @date.total_hours if @date %>
 <% end %>
