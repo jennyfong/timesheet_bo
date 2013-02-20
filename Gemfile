@@ -14,6 +14,8 @@ gem "rack-openid"
 gem 'mysql2'
 gem 'activerecord-mysql2-adapter'
 
+gem 'dotiw'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
