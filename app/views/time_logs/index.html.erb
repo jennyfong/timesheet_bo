@@ -50,7 +50,7 @@
         <%= select_hour(Time.now) %>
         <%= select_minute(Time.now) %>
 
-        <%= submit_tag "Finish Now" %>
+        <%= submit_tag "Finish" %>
     <% end %>
     <br/>
     Total : <%= distance_of_time @date.total_hours if @date %>
