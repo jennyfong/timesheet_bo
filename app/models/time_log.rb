@@ -16,6 +16,12 @@ class TimeLog < ActiveRecord::Base
 
   validate :end_time_before_start_time, :on => :update
 
+  def initialize(options)
+    super(options)
+    self.start_time = Time.now
+    self.bill_date = BillDate.find_by_date(Date.today)
+  end
+
 
   def end_time_before_start_time
     unless self.end_time.blank? or (self.end_time > self.start_time)

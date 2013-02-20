@@ -40,7 +40,10 @@ class TimeLogsController < ApplicationController
 
   def create
 
-    params[:time_log][:start_time] ="#{params[:date][:hour]}:#{params[:date][:minute]}"
+    if params[:date] && params[:date][:hour] && params[:date][:hour]
+      params[:time_log][:start_time] ="#{params[:date][:hour]}:#{params[:date][:minute]}"
+    end
+
     @time_log = TimeLog.create(params[:time_log])
 
     if @time_log.valid?
