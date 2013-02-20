@@ -1,0 +1,9 @@
+<% form_for :time_log, @time_log, :url => time_logs_path, :method => :post do |form| %>
+    <%= form.hidden_field :is_break, :value => true %>
+    <%= form.hidden_field :title, :value => 'Break' %>
+    <%= button_to "Take a break", time_logs_path(:is_break => true), :class => "fat_button" %>
+
+<% end %>
+
+<%= button_to "Meeting", time_logs_path(:name => 'meeting'), :class => "fat_button" %>
+<%= button_to "Ticket", time_logs_path(:name => 'ticket'), :class => "fat_button" %>
