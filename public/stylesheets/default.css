@@ -70,3 +70,8 @@
     width: 10em;
     float:left;
 }
+
+.fat_button{
+    width: 50em;
+    padding:5em;
+}
