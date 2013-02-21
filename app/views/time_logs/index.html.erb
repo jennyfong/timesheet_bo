@@ -1,39 +1,41 @@
 <h1><%= @date.date.to_time.strftime("%d %B, %Y (%A)") %> </h1>
 
-<div class="timesheet" >
-<table cellspacing="0" cellpadding="0">
-  <thead>
-  <tr>
-    <td>Time</td>
-    <td>Title</td>
-    <td>Duration</td>
-    <td>Is Break?</td>
-    <td>Actions</td>
-  </tr>
-  </thead>
-  <tbody>
-  <% @time_logs.each do |log| %>
-      <tr class="<%= cycle("odd", "even") %>">
-        <td><%= log.start_time.strftime("%H:%M") %></td>
-        <td><%= log.title %>
-          <br/>
-          <div class='description'><%= log.description %></div>
-        </td>
-        <td><%= log.duration.blank? ? '' : distance_of_time_in_words(log.start_time, log.end_time, true) %></td>
-        <td><%=log.is_break? ? 'Yes' : 'No' %></td>
-        <td>
-          <%= link_to 'Edit', edit_time_log_path(log), :method => :get %>
-          <%= link_to 'Delete', time_log_path(log), :method => :delete %>
-        </td>
-      </tr>
+<div class="timesheet">
+  <table cellspacing="0" cellpadding="0">
+    <thead>
+    <tr>
+      <td>Time</td>
+      <td>Title</td>
+      <td>Duration</td>
+      <td>Is Break?</td>
+      <td>Actions</td>
+    </tr>
+    </thead>
+    <tbody>
+    <% @time_logs.each do |log| %>
+        <tr class="<%= cycle("odd", "even") %>">
+          <td><%= log.start_time.strftime("%H:%M") %></td>
+          <td><%= log.title %>
+            <br/>
 
-  <% end %>
-  <tr>
-    <td colspan="5"><br/><%= !@date.finished_at.blank? ? "Finished at: #{@date.finished_at}" : "Updated at: #{Time.current.strftime("%H:%M")}"  %></td>
-  </tr>
-  </tbody>
-</table>
-  </div>
+            <div class='description'><%= log.description %></div>
+          </td>
+          <td><%= log.duration.blank? ? '' : distance_of_time_in_words(log.start_time, log.end_time, true) %></td>
+          <td><%= log.is_break? ? 'Yes' : 'No' %></td>
+          <td>
+            <%= link_to 'Edit', edit_time_log_path(log), :method => :get %>
+            <%= link_to 'Delete', time_log_path(log), :method => :delete %>
+          </td>
+        </tr>
+
+
+    <% end %>
+    <tr>
+      <td colspan="5"><%= @date.finished_at if @date %></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
 
 <%= render :partial => 'time_log_selector' %>
 <%= form_for @time_log, :as => :time_log, :html => {:method => (@time_log.valid? ? :put : :post), :class => 'report'} do |f| %>
@@ -48,9 +50,6 @@
     <br/>
 
     <% form_tag finish_time_log_path(@date), :method => :post do %>
-        <%= select_hour(Time.now) %>
-        <%= select_minute(Time.now) %>
-
         <%= submit_tag "Finish" %>
     <% end %>
     <br/>

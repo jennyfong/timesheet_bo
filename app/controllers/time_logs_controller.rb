@@ -24,7 +24,7 @@ class TimeLogsController < ApplicationController
   end
 
   def edit
-     redirect_to time_logs_path(params[:bill_date_id], :time_log_id => params[:id])
+    redirect_to time_logs_path(params[:bill_date_id], :time_log_id => params[:id])
   end
 
   def update
@@ -68,7 +68,13 @@ class TimeLogsController < ApplicationController
   def finish
     bill_date = BillDate.find(params[:id])
     last_log = bill_date.time_logs.last
-    last_log.end_time = params[:date][:hour] + ":" + params[:date][:minute]
+    if params[:date] && params[:date][:hour] && params[:date][:minute]
+      last_log.end_time = params[:date][:hour] + ":" + params[:date][:minute]
+    else
+      last_log.end_time = Time.now
+    end
+
+
     last_log.save
     last_log.update_duration
 
