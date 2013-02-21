@@ -11,4 +11,7 @@
 <% end %>
 
 
-<%= button_to "Ticket", time_logs_path({:type => 'ticket'}), :class => "fat_button", :method => :get %>
+<% form_tag time_logs_path, :method => :get do %>
+    <%=  hidden_field_tag :type, 'ticket' %>
+    <%= button_to "Ticket", :class => "fat_button" %>
+<% end %>

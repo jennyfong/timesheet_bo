@@ -20,7 +20,7 @@
 
             <div class='description'><%= log.description %></div>
           </td>
-          <td><%= log.duration.blank? ? '' : distance_of_time_in_words(log.start_time, log.end_time, true) %></td>
+          <td><%= log.duration.blank? ? '' : distance_of_time_in_words(log.start_time, log.end_time, true, :only => ["minutes", "hours"]) %></td>
           <td><%= log.is_break? ? 'Yes' : 'No' %></td>
           <td>
             <%= link_to 'Edit', edit_time_log_path(log), :method => :get %>
@@ -60,5 +60,5 @@
         <%= submit_tag "Finish" %>
     <% end %>
     <br/>
-    Total : <%= distance_of_time @date.total_hours if @date %>
+    Total : <%= distance_of_time(@date.total_hours, :only => ["minutes", "hours"]) if @date %>
 <% end %>

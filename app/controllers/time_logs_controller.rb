@@ -50,6 +50,7 @@ class TimeLogsController < ApplicationController
     if params[:date] && params[:date][:hour] && params[:date][:hour]
       params[:time_log][:start_time] ="#{params[:date][:hour]}:#{params[:date][:minute]}"
     end
+    params[:time_log][:title] = "##{params[:time_log][:reference_id]}" if params[:time_log][:reference_id]
 
     @time_log = TimeLog.create(params[:time_log])
 
