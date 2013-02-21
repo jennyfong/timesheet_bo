@@ -1,3 +1,4 @@
+
 <%= f.hidden_field :bill_date_id %>
 <%= f.label :start_time %>
 
@@ -6,6 +7,11 @@
 <%= select_minute(@time_log.new_record? ? Time.current : @time_log.start_time) %>
 
 <br/>
+
+<p>
+  <%= f.label :reference_id %>
+  <%= f.text_field :reference_id %>
+</p>
 <p>
   <%= f.label :title %>
   <%= f.text_field :title %>
@@ -13,10 +19,6 @@
 <p>
   <%= f.label :description %>
   <%= f.text_area :description, :rows => 2 %>
-</p>
-<p>
-  <%= f.label :reference_id %>
-  <%= f.text_field :reference_id %>
 </p>
 <p>
   <%= f.label :is_break %>

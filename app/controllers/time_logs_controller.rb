@@ -16,6 +16,13 @@ class TimeLogsController < ApplicationController
       @time_log = TimeLog.new(:bill_date => @date)
     end
 
+    @partial = case params[:type]
+                 when 'ticket'
+                    'form_ticket'
+                 else
+
+               end
+
 
   end
 
