@@ -37,7 +37,7 @@
   </table>
 </div>
 
-<% if params[:time_log_id] %>
+<% if params[:time_log_id] || params[:time_log] %>
     <%= form_for @time_log, :as => :time_log, :html => {:method => (@time_log.valid? ? :put : :post), :class => 'report'} do |f| %>
         <%= hidden_field_tag :bill_date_id, @date.id %>
         <%= render :partial => 'form', :locals => {:f => f} %>
