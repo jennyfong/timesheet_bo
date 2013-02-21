@@ -13,7 +13,7 @@
     </thead>
     <tbody>
     <% @time_logs.each do |log| %>
-        <tr class="<%= cycle("odd", "even") %>">
+        <tr class="<%= cycle("odd", "even") %> <%= 'break' if log.is_break?  %>">
           <td><%= log.start_time.strftime("%H:%M") %></td>
           <td><%= log.title %>
             <br/>

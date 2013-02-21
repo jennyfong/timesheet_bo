@@ -75,3 +75,7 @@
     width: 50em;
     padding:5em;
 }
+
+tr.is_break{
+    background-color: green;
+}
