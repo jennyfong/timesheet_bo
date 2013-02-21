@@ -11,6 +11,10 @@ gem 'acts_as_list'
 
 gem "ruby-openid"
 gem "rack-openid"
+gem 'mysql2'
+gem 'activerecord-mysql2-adapter'
+
+gem 'dotiw'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -34,3 +38,21 @@ gem "rack-openid"
 # group :development, :test do
 #   gem 'webrat'
 # end
+
+group :test do
+  gem 'rspec-rails', '>= 2.0.0.beta.10'
+end
+
+group :cucumber do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'cucumber-rails'
+  gem 'cucumber', '0.7.3'
+  gem 'rspec-rails', '>= 2.0.0.beta.10'
+  gem 'spork'
+  gem 'launchy'    # So you can do Then show me the page
+end
+
+
+
+

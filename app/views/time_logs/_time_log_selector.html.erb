@@ -5,5 +5,9 @@
 
 <% end %>
 
-<%= button_to "Meeting", time_logs_path(:name => 'meeting'), :class => "fat_button" %>
+<% form_for :time_log, @time_log, :url => time_logs_path, :method => :post do |form| %>
+    <%= form.hidden_field :title, :value => 'Meeting' %>
+    <%= button_to "Meeting", time_logs_path(:name => 'meeting'), :class => "fat_button" %>
+<% end %>
+
 <%= button_to "Ticket", time_logs_path(:name => 'ticket'), :class => "fat_button" %>
