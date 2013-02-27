@@ -15,6 +15,11 @@
       <%= hidden_field_tag :type, 'ticket' %>
       <%= button_to "Ticket", {}, :class => "fat_button" %>
   <% end %>
+
+  <% form_tag time_logs_path, :method => :get do %>
+      <%= hidden_field_tag :time_log %>
+      <%= button_to "Others", {}, :class => "fat_button" %>
+  <% end %>
 </div>
 
 <% User.first.favourite_time_logs.each do |favourite| %>

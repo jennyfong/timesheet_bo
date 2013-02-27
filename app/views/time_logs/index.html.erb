@@ -43,6 +43,7 @@
     <%=  button_to :cancel, time_logs_path, :method => :get  %>
 <% elsif params[:type] %>
     <%= render :partial => @partial %>
+    <%=  button_to :cancel, time_logs_path, :method => :get  %>
 <% else %>
     <%= render :partial => 'time_log_selector' %>
 <% end %>
