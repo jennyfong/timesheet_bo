@@ -78,9 +78,13 @@ class TimeLogsController < ApplicationController
     bill_date = BillDate.find(params[:id])
     last_log = bill_date.time_logs.last
     if params[:date] && params[:date][:hour] && params[:date][:minute]
-      last_log.end_time = params[:date][:hour] + ":" + params[:date][:minute]
+      last_log.end_time = DateTime.new(bill_date.year,
+                                       bill_date.month,
+                                       bill_date.day,
+                                       params[:date][:hour].to_i,
+                                       params[:date][:minute].to_i)
     else
-      last_log.end_time = Time.now
+      last_log.end_time = DateTime.now
     end
 
 

@@ -26,12 +26,32 @@ class BillDate < ActiveRecord::Base
     end
   end
 
+  def year
+    self.date.year
+  end
+
+  def month
+    self.date.month
+  end
+
+  def day
+    self.date.day
+  end
+
+  def started_at
+    self.time_logs.first.start_time if self.time_logs.size > 0
+  end
+
   def total_hours
-    self.time_logs.select { |i| !i.is_break? }.collect { |i| i.duration.to_i }.sum
+    self.time_logs.all(:conditions => ["is_break is false or is_break is ?", nil]).collect { |i| i.duration.to_i }.sum
   end
 
   def finished_at
-    (self.time_logs.last.blank? || self.time_logs.last.end_time.blank?) ? '' : self.time_logs.last.end_time.strftime("%H:%M")
+    (self.time_logs.last.blank? || self.time_logs.last.end_time.blank?) ? '' : self.time_logs.last.end_time
+  end
+
+  def total_break
+    self.time_logs.all(:conditions => ["is_break is true"]).collect{|i| i.duration.to_i}.sum
   end
 
 end

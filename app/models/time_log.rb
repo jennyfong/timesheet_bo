@@ -16,6 +16,7 @@ class TimeLog < ActiveRecord::Base
 
   before_create :update_reference_title
 
+
   belongs_to :issue, :foreign_key => 'reference_id'
 
   validate :end_time_before_start_time, :on => :update
@@ -61,6 +62,7 @@ class TimeLog < ActiveRecord::Base
     end
 
   end
+
 
 
   def calculate_duration
