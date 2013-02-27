@@ -31,7 +31,7 @@ class BillDate < ActiveRecord::Base
   end
 
   def finished_at
-    (self.time_logs.last.blank? || self.time_logs.last.end_time.blank?) ? '' : self.time_logs.last.end_time.strftime("%H:%S")
+    (self.time_logs.last.blank? || self.time_logs.last.end_time.blank?) ? '' : self.time_logs.last.end_time.strftime("%H:%M")
   end
 
 end
