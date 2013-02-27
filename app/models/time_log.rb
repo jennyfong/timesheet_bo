@@ -14,7 +14,7 @@ class TimeLog < ActiveRecord::Base
 
   before_destroy :update_previous
 
-  before_save :update_reference_title
+  before_create :update_reference_title
 
   belongs_to :issue, :foreign_key => 'reference_id'
 
