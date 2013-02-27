@@ -4,7 +4,7 @@
 
 <%= select_hour(@time_log.new_record? ? Time.current : @time_log.start_time) %>
 
-<%= select_minute(@time_log.new_record? ? Time.current : @time_log.start_time) %>
+<%= select_minute(@time_log.new_record? ? Time.current : @time_log.start_time, :minute_step => 5) %>
 
 <br/>
 

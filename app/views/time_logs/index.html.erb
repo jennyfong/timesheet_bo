@@ -61,18 +61,22 @@
     <br/>
     <label>Started at</label>
     <%= short_time @date.started_at %>
-    <br/>
+    <br/><br/>
+    Break: <%= distance_of_time(@date.total_break) if @date %>
+    <br/><br/>
     <label>Finished at</label>
     <%= short_time @date.finished_at %>
-    <br/>
+    <br/><br/>
+    Total : <%= distance_of_time(@date.total_hours) if @date %>
+    <br/><br/>
     <%= button_to "Update Time", time_logs_path, :method => :get %>
+
     <% form_tag finish_time_log_path(@date), :method => :post do %>
-        <%= select_hour(Time.now, :field_name => :hour) %>
-        <%= select_minute(Time.now, :field_name => :minute, :minute_step => 15) %>
+        <%= select_hour(Time.current, :field_name => :hour) %>
+        <%= select_minute(Time.current, :field_name => :minute, :minute_step => 5) %>
         <%= submit_tag "Finish" %>
     <% end %>
-    <br/>
-    Total : <%= distance_of_time(@date.total_hours, {:only => ["minutes", "hours"]}) if @date %>
-    <br/>
-    Break: <%= distance_of_time(@date.total_break, {:only => ["minutes", "hours"]}) if @date %>
+
+
+
 <% end %>
