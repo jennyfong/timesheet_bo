@@ -24,5 +24,10 @@
   <%= f.label :is_break %>
   <%= f.check_box :is_break %>
 </p>
+
+<p>
+  <%= f.label :is_favourite %>
+  <%= f.check_box :is_favourite %>
+</p>
 <br/>
 <%= f.submit @time_log.valid? ? "Update" : "Create" %>

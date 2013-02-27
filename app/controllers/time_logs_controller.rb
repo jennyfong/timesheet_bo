@@ -93,4 +93,11 @@ class TimeLogsController < ApplicationController
 
   end
 
+  #to-do filtered by user
+  def self.favourites
+    current_user = User.first
+    User.timelogs
+
+  end
+
 end

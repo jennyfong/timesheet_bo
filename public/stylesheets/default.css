@@ -1,7 +1,7 @@
 
 
 #main_wrapper{
-    width:1000px;
+    width:80em;
     margin:0 auto;
     font-size:0.9em;
 }
@@ -9,31 +9,41 @@
 
 #left_panel{
     float:left;
-    width: 200px;
+    width: 20em;
 }
 
 #right_panel{
     float:left;
-    width:800px;
+    width:60em;
     padding:0px;
 }
 
-
 .timesheet{
     height: 300px;
-    border:1px solid gray;
     overflow: auto;
-
 }
 
 .timesheet table {
-    width: 800px;
-
-    padding:1em;
+    width: 60em;
     margin:0 0 1em 0;
-
-
 }
+
+.timesheet .time{
+    width: 1.5em;
+}
+
+.timesheet .title{
+    width: 15em;
+}
+
+.timesheet .duration{
+    width: 5em;
+}
+
+.timesheet .actions{
+    width: 2em;
+}
+
 
 .timesheet tr{
     height:1em;
@@ -51,10 +61,19 @@
 
 .timesheet tr, .timesheet td{
     margin:0;
+    padding:.25em;
 }
 
-.timesheet  tr.even{
-    background-color: #cccccc;
+.timesheet tbody tr{
+    background-color: #e7ffe4;
+}
+
+tr.break {
+    background-color: #fff !important;
+}
+
+.timesheet  tr:hover{
+    background-color: #c4e8c8 !important;
 }
 
 
@@ -73,10 +92,16 @@
 }
 
 .fat_button{
-    width: 50em;
-    padding:5em;
+    width: 10em;
+    padding:3em;
 }
 
-tr.is_break{
-    background-color: green;
+.favorite_button{
+    width: 5em;
+    padding: 3em;
 }
+
+.favourite_div{
+    float:left;
+}
+

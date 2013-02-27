@@ -4,34 +4,32 @@
   <table cellspacing="0" cellpadding="0">
     <thead>
     <tr>
-      <td>Time</td>
-      <td>Title</td>
-      <td>Duration</td>
-      <td>Is Break?</td>
-      <td>Actions</td>
+      <td class='time'>Time</td>
+      <td class='title'>Title</td>
+      <td class='duration'>Duration</td>
+      <td class='actions'>Actions</td>
     </tr>
     </thead>
     <tbody>
     <% @time_logs.each do |log| %>
-        <tr class="<%= cycle("odd", "even") %> <%= 'break' if log.is_break?  %>">
+        <tr class="<%= cycle("odd", "even") %> <%= 'break' if log.is_break? %>">
           <td><%= log.start_time.strftime("%H:%M") %></td>
-          <td><%= log.title %>
+          <td><%= truncate(log.title, :length => 160) %>
             <br/>
-
-            <div class='description'><%= log.description %></div>
+            <div class='description'><%= truncate(h(log.description), :length => 70) %></div>
           </td>
-          <td><%= log.duration.blank? ? '' : distance_of_time_in_words(log.start_time, log.end_time, true, :only => ["minutes", "hours"]) %></td>
-          <td><%= log.is_break? ? 'Yes' : 'No' %></td>
+          <td>
+            <%= log.duration.blank? ? '' : distance_of_time_in_words(log.start_time, log.end_time, true, :only => ["minutes", "hours"]) %>
+            <%= log.is_break? ? '(break)' : '' %>
+          </td>
           <td>
             <%= link_to 'Edit', edit_time_log_path(log), :method => :get %>
             <%= link_to 'Delete', time_log_path(log), :method => :delete %>
           </td>
         </tr>
-
-
     <% end %>
     <tr>
-      <td colspan="5"><%= @date.finished_at if @date %></td>
+      <td colspan="4"><%= @date.finished_at if @date %></td>
     </tr>
     </tbody>
   </table>
@@ -60,5 +58,5 @@
         <%= submit_tag "Finish" %>
     <% end %>
     <br/>
-    Total : <%= distance_of_time(@date.total_hours, :only => ["minutes", "hours"]) if @date %>
+    Total : <%= distance_of_time(@date.total_hours, {:only => ["minutes", "hours"]}) if @date %>
 <% end %>

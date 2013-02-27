@@ -1,17 +1,29 @@
-<% form_for :time_log, @time_log, :url => time_logs_path, :method => :post do |form| %>
-    <%= form.hidden_field :is_break, :value => true %>
-    <%= form.hidden_field :title, :value => 'Break' %>
-    <%= button_to "Take a break", time_logs_path, :class => "fat_button" %>
+<div class='favourite_div'>
+  <% form_for :time_log, @time_log, :url => time_logs_path, :method => :post do |form| %>
+      <%= form.hidden_field :is_break, :value => true %>
+      <%= form.hidden_field :title, :value => 'Break' %>
+      <%= button_to "Take a break", time_logs_path, :class => "fat_button" %>
 
-<% end %>
+  <% end %>
 
-<% form_for :time_log, @time_log, :url => time_logs_path, :method => :post do |form| %>
-    <%= form.hidden_field :title, :value => 'Meeting' %>
-    <%= button_to "Meeting", time_logs_path(:name => 'meeting'), :class => "fat_button" %>
-<% end %>
+  <% form_for :time_log, @time_log, :url => time_logs_path, :method => :post do |form| %>
+      <%= form.hidden_field :title, :value => 'Meeting' %>
+      <%= button_to "Meeting", time_logs_path(:name => 'meeting'), :class => "fat_button" %>
+  <% end %>
 
+  <% form_tag time_logs_path, :method => :get do %>
+      <%= hidden_field_tag :type, 'ticket' %>
+      <%= button_to "Ticket", {}, :class => "fat_button" %>
+  <% end %>
+</div>
 
-<% form_tag time_logs_path, :method => :get do %>
-    <%=  hidden_field_tag :type, 'ticket' %>
-    <%= button_to "Ticket", {},:class => "fat_button" %>
+<% User.first.favourite_time_logs.each do |favourite| %>
+    <div class='favourite_div'>
+      <% form_tag time_logs_path, :method => :get do %>
+          <%= hidden_field_tag :is_break, favourite.is_break? %>
+          <%= hidden_field_tag :title, favourite.title %>
+          <%= hidden_field_tag :description, favourite.description %>
+          <%= button_to "#{truncate(favourite.title, :length => 40)}", {}, :class => "favorite_button" %>
+      <% end %>
+    </div>
 <% end %>
