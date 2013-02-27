@@ -18,9 +18,10 @@
     padding:0px;
 }
 
-.timesheet{
+.timesheet .content{
     height: 300px;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x:hidden
 }
 
 .timesheet table {
