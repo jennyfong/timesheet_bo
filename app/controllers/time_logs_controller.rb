@@ -18,7 +18,7 @@ class TimeLogsController < ApplicationController
 
     @partial = case params[:type]
                  when 'ticket'
-                    'form_ticket'
+                   'form_ticket'
                  else
 
                end
@@ -50,9 +50,12 @@ class TimeLogsController < ApplicationController
     if params[:date] && params[:date][:hour] && params[:date][:hour]
       params[:time_log][:start_time] ="#{params[:date][:hour]}:#{params[:date][:minute]}"
     end
-    params[:time_log][:title] = "##{params[:time_log][:reference_id]}" if params[:time_log][:reference_id]
+
+
+    params[:time_log][:title] = Issue.get_subject(params[:time_log][:reference_id]) if params[:time_log][:reference_id]
 
     @time_log = TimeLog.create(params[:time_log])
+
 
     if @time_log.valid?
       redirect_to time_logs_path(:bill_date => params[:time_log][:bill_date])

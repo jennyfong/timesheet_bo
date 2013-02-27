@@ -14,6 +14,8 @@ class TimeLog < ActiveRecord::Base
 
   before_destroy :update_previous
 
+  belongs_to :issue, :foreign_key => 'reference_id'
+
   validate :end_time_before_start_time, :on => :update
 
   def initialize(options)
