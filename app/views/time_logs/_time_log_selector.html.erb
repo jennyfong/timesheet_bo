@@ -19,11 +19,12 @@
 
 <% User.first.favourite_time_logs.each do |favourite| %>
     <div class='favourite_div'>
-      <% form_tag time_logs_path, :method => :get do %>
-          <%= hidden_field_tag :is_break, favourite.is_break? %>
-          <%= hidden_field_tag :title, favourite.title %>
-          <%= hidden_field_tag :description, favourite.description %>
-          <%= button_to "#{truncate(favourite.title, :length => 40)}", {}, :class => "favorite_button" %>
+      <% form_for :time_log, @time_log, :url => time_logs_path, :method => :post do |form| %>
+          <%= form.hidden_field :is_break, :value => favourite.is_break? %>
+          <%= form.hidden_field :reference_id, :value => favourite.reference_id %>
+          <%= form.hidden_field :title, :value => favourite.title %>
+          <%= form.hidden_field :description, :value => favourite.description %>
+          <%= button_to "#{short_cut(favourite.title)}", {}, :class => "favorite_button" %>
       <% end %>
     </div>
 <% end %>

@@ -40,6 +40,7 @@
         <%= hidden_field_tag :bill_date_id, @date.id %>
         <%= render :partial => 'form', :locals => {:f => f} %>
     <% end %>
+    <%=  button_to :cancel, time_logs_path, :method => :get  %>
 <% elsif params[:type] %>
     <%= render :partial => @partial %>
 <% else %>

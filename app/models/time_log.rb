@@ -14,6 +14,8 @@ class TimeLog < ActiveRecord::Base
 
   before_destroy :update_previous
 
+  before_save :update_reference_title
+
   belongs_to :issue, :foreign_key => 'reference_id'
 
   validate :end_time_before_start_time, :on => :update
@@ -28,6 +30,13 @@ class TimeLog < ActiveRecord::Base
   def end_time_before_start_time
     unless self.end_time.blank? or (self.end_time > self.start_time)
       return false
+    end
+  end
+
+  def update_reference_title
+    unless self.reference_id.blank?
+      subject = Issue.get_subject(self.reference_id)
+      self.title = subject unless subject.blank?
     end
   end
 
@@ -52,7 +61,6 @@ class TimeLog < ActiveRecord::Base
     end
 
   end
-
 
 
   def calculate_duration

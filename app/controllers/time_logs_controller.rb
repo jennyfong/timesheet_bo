@@ -52,8 +52,6 @@ class TimeLogsController < ApplicationController
     end
 
 
-    params[:time_log][:title] = Issue.get_subject(params[:time_log][:reference_id]) if params[:time_log][:reference_id]
-
     @time_log = TimeLog.create(params[:time_log])
 
 
