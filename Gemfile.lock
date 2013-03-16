@@ -141,4 +141,3 @@ DEPENDENCIES
   rspec-rails (>= 2.0.0.beta.10)
   ruby-openid
   spork
-  sqlite3-ruby
