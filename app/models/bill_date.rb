@@ -4,7 +4,7 @@ class BillDate < ActiveRecord::Base
   validates_uniqueness_of :date, :scope => :user_id
 
   def initialize()
-    self.user_id = User.first
+    self.user_id = User.first.id
   end
 
   def reorder
