@@ -43,7 +43,7 @@ class BillDate < ActiveRecord::Base
   end
 
   def total_hours
-    self.time_logs.all(:conditions => ["is_break is false or is_break is ?", nil]).collect { |i| i.duration.to_i }.sum
+    self.time_logs.all(:conditions => ["is_break = ? or is_break = ?", false, nil]).collect { |i| i.duration.to_i }.sum
   end
 
   def finished_at
@@ -51,7 +51,7 @@ class BillDate < ActiveRecord::Base
   end
 
   def total_break
-    self.time_logs.all(:conditions => ["is_break is true"]).collect{|i| i.duration.to_i}.sum
+    self.time_logs.all(:conditions => ["is_break = ?", true]).collect{|i| i.duration.to_i}.sum
   end
 
 end

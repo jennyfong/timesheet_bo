@@ -4,6 +4,6 @@ class User < ActiveRecord::Base
 
 
   def favourite_time_logs
-    self.time_logs.all(:conditions => 'is_favourite is true')
+    self.time_logs.all(:conditions => ['is_favourite = ?', true])
   end
 end
