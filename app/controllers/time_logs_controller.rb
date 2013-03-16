@@ -16,6 +16,13 @@ class TimeLogsController < ApplicationController
       @time_log = TimeLog.new(:bill_date => @date)
     end
 
+    @partial = case params[:type]
+                 when 'ticket'
+                   'form_ticket'
+                 else
+
+               end
+
 
   end
 
@@ -44,7 +51,9 @@ class TimeLogsController < ApplicationController
       params[:time_log][:start_time] ="#{params[:date][:hour]}:#{params[:date][:minute]}"
     end
 
+
     @time_log = TimeLog.create(params[:time_log])
+
 
     if @time_log.valid?
       redirect_to time_logs_path(:bill_date => params[:time_log][:bill_date])
@@ -69,9 +78,13 @@ class TimeLogsController < ApplicationController
     bill_date = BillDate.find(params[:id])
     last_log = bill_date.time_logs.last
     if params[:date] && params[:date][:hour] && params[:date][:minute]
-      last_log.end_time = params[:date][:hour] + ":" + params[:date][:minute]
+      last_log.end_time = DateTime.new(bill_date.year,
+                                       bill_date.month,
+                                       bill_date.day,
+                                       params[:date][:hour].to_i,
+                                       params[:date][:minute].to_i)
     else
-      last_log.end_time = Time.now
+      last_log.end_time = DateTime.now
     end
 
 
@@ -79,6 +92,13 @@ class TimeLogsController < ApplicationController
     last_log.update_duration
 
     redirect_to time_logs_path(:bill_date => bill_date)
+
+  end
+
+  #to-do filtered by user
+  def self.favourites
+    current_user = User.first
+    User.timelogs
 
   end
 

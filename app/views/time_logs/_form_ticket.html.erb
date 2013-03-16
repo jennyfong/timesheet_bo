@@ -1,0 +1,6 @@
+<% form_for :time_log, @time_log, :url => time_logs_path, :method => :post do |form|%>
+    <p>
+      <label>Ticket Number</label>
+      <%= form.text_field :reference_id %>
+    </p>
+<% end %>

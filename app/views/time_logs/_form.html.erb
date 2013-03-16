@@ -1,11 +1,17 @@
+
 <%= f.hidden_field :bill_date_id %>
 <%= f.label :start_time %>
 
 <%= select_hour(@time_log.new_record? ? Time.current : @time_log.start_time) %>
 
-<%= select_minute(@time_log.new_record? ? Time.current : @time_log.start_time) %>
+<%= select_minute(@time_log.new_record? ? Time.current : @time_log.start_time, :minute_step => 5) %>
 
 <br/>
+
+<p>
+  <%= f.label :reference_id %>
+  <%= f.text_field :reference_id %>
+</p>
 <p>
   <%= f.label :title %>
   <%= f.text_field :title %>
@@ -15,12 +21,13 @@
   <%= f.text_area :description, :rows => 2 %>
 </p>
 <p>
-  <%= f.label :reference_id %>
-  <%= f.text_field :reference_id %>
-</p>
-<p>
   <%= f.label :is_break %>
   <%= f.check_box :is_break %>
+</p>
+
+<p>
+  <%= f.label :is_favourite %>
+  <%= f.check_box :is_favourite %>
 </p>
 <br/>
 <%= f.submit @time_log.valid? ? "Update" : "Create" %>

@@ -1,57 +1,82 @@
 <h1><%= @date.date.to_time.strftime("%d %B, %Y (%A)") %> </h1>
-
 <div class="timesheet">
   <table cellspacing="0" cellpadding="0">
     <thead>
     <tr>
-      <td>Time</td>
-      <td>Title</td>
-      <td>Duration</td>
-      <td>Is Break?</td>
-      <td>Actions</td>
+      <td class='time'>Time</td>
+      <td class='title'>Title</td>
+      <td class='duration'>Duration</td>
+      <td class='actions'>Actions</td>
     </tr>
     </thead>
-    <tbody>
-    <% @time_logs.each do |log| %>
-        <tr class="<%= cycle("odd", "even") %>">
-          <td><%= log.start_time.strftime("%H:%M") %></td>
-          <td><%= log.title %>
-            <br/>
-
-            <div class='description'><%= log.description %></div>
-          </td>
-          <td><%= log.duration.blank? ? '' : distance_of_time_in_words(log.start_time, log.end_time, true) %></td>
-          <td><%= log.is_break? ? 'Yes' : 'No' %></td>
-          <td>
-            <%= link_to 'Edit', edit_time_log_path(log), :method => :get %>
-            <%= link_to 'Delete', time_log_path(log), :method => :delete %>
-          </td>
-        </tr>
-
-
-    <% end %>
-    <tr>
-      <td colspan="5"><%= @date.finished_at if @date %></td>
-    </tr>
-    </tbody>
   </table>
+  <div class='content'>
+    <table cellspacing="0" cellpadding="0">
+      <tbody>
+      <% @time_logs.each do |log| %>
+          <tr class="<%= cycle("odd", "even") %> <%= 'break' if log.is_break? %>">
+            <td class='time'><%= log.start_time.strftime("%H:%M") %></td>
+            <td class='title'><%= truncate(log.title, :length => 160) %>
+              <br/>
+
+              <div class='description'><%= truncate(h(log.description), :length => 70) %></div>
+            </td>
+            <td class='duration'>
+              <%= log.duration.blank? ? '' : distance_of_time_in_words(log.start_time, log.end_time, true, :only => ["minutes", "hours"]) %>
+              <%= log.is_break? ? '(break)' : '' %>
+            </td>
+            <td class='actions'>
+              <%= link_to 'Edit', edit_time_log_path(log), :method => :get %>
+              <%= link_to 'Delete', time_log_path(log), :method => :delete %>
+            </td>
+          </tr>
+      <% end %>
+      <tr>
+        <td colspan="4"><%= @date.finished_at if @date %></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
-<%= render :partial => 'time_log_selector' %>
-<%= form_for @time_log, :as => :time_log, :html => {:method => (@time_log.valid? ? :put : :post), :class => 'report'} do |f| %>
-    <%= hidden_field_tag :bill_date_id, @date.id %>
-    <%= render :partial => 'form', :locals => {:f => f} %>
+<% if params[:time_log_id] || params[:time_log] %>
+    <%= form_for @time_log, :as => :time_log, :html => {:method => (@time_log.valid? ? :put : :post), :class => 'report'} do |f| %>
+        <%= hidden_field_tag :bill_date_id, @date.id %>
+        <%= render :partial => 'form', :locals => {:f => f} %>
+    <% end %>
+    <%= button_to :cancel, time_logs_path, :method => :get %>
+<% elsif params[:type] %>
+    <%= render :partial => @partial %>
+    <%= button_to :cancel, time_logs_path, :method => :get %>
+<% else %>
+    <%= render :partial => 'time_log_selector' %>
 <% end %>
+
+
 
 <% content_for :left_panel do %>
     <% @bill_dates.each do |bill_date| %>
         <%= link_to bill_date.date, time_logs_path(:date => bill_date.date) %><br/>
     <% end %>
     <br/>
+    <label>Started at</label>
+    <%= short_time @date.started_at %>
+    <br/><br/>
+    Break: <%= distance_of_time(@date.total_break) if @date %>
+    <br/><br/>
+    <label>Finished at</label>
+    <%= short_time @date.finished_at %>
+    <br/><br/>
+    Total : <%= distance_of_time(@date.total_hours) if @date %>
+    <br/><br/>
+    <%= button_to "Update Time", time_logs_path, :method => :get %>
 
     <% form_tag finish_time_log_path(@date), :method => :post do %>
+        <%= select_hour(Time.current, :field_name => :hour) %>
+        <%= select_minute(Time.current, :field_name => :minute, :minute_step => 5) %>
         <%= submit_tag "Finish" %>
     <% end %>
-    <br/>
-    Total : <%= distance_of_time @date.total_hours if @date %>
+
+
+
 <% end %>

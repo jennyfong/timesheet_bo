@@ -1,13 +1,35 @@
-<% form_for :time_log, @time_log, :url => time_logs_path, :method => :post do |form| %>
-    <%= form.hidden_field :is_break, :value => true %>
-    <%= form.hidden_field :title, :value => 'Break' %>
-    <%= button_to "Take a break", time_logs_path(:is_break => true), :class => "fat_button" %>
+<div class='favourite_div'>
+  <% form_for :time_log, @time_log, :url => time_logs_path, :method => :post do |form| %>
+      <%= form.hidden_field :is_break, :value => true %>
+      <%= form.hidden_field :title, :value => 'Break' %>
+      <%= button_to "Take a break", time_logs_path, :class => "fat_button" %>
 
+  <% end %>
+
+  <% form_for :time_log, @time_log, :url => time_logs_path, :method => :post do |form| %>
+      <%= form.hidden_field :title, :value => 'Meeting' %>
+      <%= button_to "Meeting", time_logs_path(:name => 'meeting'), :class => "fat_button" %>
+  <% end %>
+
+  <% form_tag time_logs_path, :method => :get do %>
+      <%= hidden_field_tag :type, 'ticket' %>
+      <%= button_to "Ticket", {}, :class => "fat_button" %>
+  <% end %>
+
+  <% form_tag time_logs_path, :method => :get do %>
+      <%= hidden_field_tag :time_log %>
+      <%= button_to "Others", {}, :class => "fat_button" %>
+  <% end %>
+</div>
+
+<% User.first.favourite_time_logs.each do |favourite| %>
+    <div class='favourite_div'>
+      <% form_for :time_log, @time_log, :url => time_logs_path, :method => :post do |form| %>
+          <%= form.hidden_field :is_break, :value => favourite.is_break? %>
+          <%= form.hidden_field :reference_id, :value => favourite.reference_id %>
+          <%= form.hidden_field :title, :value => favourite.title %>
+          <%= form.hidden_field :description, :value => favourite.description %>
+          <%= button_to "#{short_cut(favourite.title)}", {}, :class => "favorite_button" %>
+      <% end %>
+    </div>
 <% end %>
-
-<% form_for :time_log, @time_log, :url => time_logs_path, :method => :post do |form| %>
-    <%= form.hidden_field :title, :value => 'Meeting' %>
-    <%= button_to "Meeting", time_logs_path(:name => 'meeting'), :class => "fat_button" %>
-<% end %>
-
-<%= button_to "Ticket", time_logs_path(:name => 'ticket'), :class => "fat_button" %>
