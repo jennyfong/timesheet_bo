@@ -10,7 +10,7 @@ gem 'acts_as_list'
 
 gem "ruby-openid"
 gem "rack-openid"
-gem 'mysql2'
+gem 'mysql2', "0.2.7"
 gem 'activerecord-mysql2-adapter'
 
 gem 'dotiw'
