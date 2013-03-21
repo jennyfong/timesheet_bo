@@ -39,18 +39,6 @@
   </div>
 </div>
 
-<% if params[:time_log_id] || params[:time_log] %>
-    <%= form_for @time_log, :as => :time_log, :html => {:method => (@time_log.valid? ? :put : :post), :class => 'report'} do |f| %>
-        <%= hidden_field_tag :bill_date_id, @date.id %>
-        <%= render :partial => 'form', :locals => {:f => f} %>
-    <% end %>
-    <%= button_to :cancel, time_logs_path, :method => :get %>
-<% elsif params[:type] %>
-    <%= render :partial => @partial %>
-    <%= button_to :cancel, time_logs_path, :method => :get %>
-<% else %>
-    <%= render :partial => 'time_log_selector' %>
-<% end %>
 
 
 
@@ -80,3 +68,18 @@
 
 
 <% end %>
+
+<div style="float:left">
+  <% if params[:time_log_id] || params[:time_log] %>
+      <%= form_for @time_log, :as => :time_log, :html => {:method => (@time_log.valid? ? :put : :post), :class => 'report'} do |f| %>
+          <%= hidden_field_tag :bill_date_id, @date.id %>
+          <%= render :partial => 'form', :locals => {:f => f} %>
+      <% end %>
+      <%= button_to :cancel, time_logs_path, :method => :get %>
+  <% elsif params[:type] %>
+      <%= render :partial => @partial %>
+      <%= button_to :cancel, time_logs_path, :method => :get %>
+  <% else %>
+      <%= render :partial => 'time_log_selector' %>
+  <% end %>
+</div>
