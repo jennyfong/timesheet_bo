@@ -72,7 +72,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.16)
     multi_json (1.5.0)
-    mysql2 (0.3.11)
+    mysql2 (0.2.7)
     nokogiri (1.5.6)
     polyglot (0.3.1)
     rack (1.2.1)
@@ -137,7 +137,7 @@ DEPENDENCIES
   database_cleaner
   dotiw
   launchy
-  mysql2
+  mysql2 (= 0.2.7)
   rack-openid
   rails (= 3.0.3)
   rspec-rails (>= 2.0.0.beta.10)

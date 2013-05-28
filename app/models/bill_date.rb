@@ -3,9 +3,7 @@ class BillDate < ActiveRecord::Base
 
   validates_uniqueness_of :date, :scope => :user_id
 
-  def initialize()
-    self.user_id = User.first
-  end
+
 
   def reorder
     position = 1
