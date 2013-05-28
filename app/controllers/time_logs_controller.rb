@@ -6,8 +6,7 @@ class TimeLogsController < ApplicationController
     @user = params[:user_id].blank? ? current_user : User.find(params[:user_id])
     @bill_dates = BillDate.all
     @date = BillDate.find_by_date(params[:date]) if params[:date]
-    @date ||= BillDate.find_or_create_by_date(:date => Date.current)
-
+    @date ||= BillDate.find_or_create_by_date(Date.current)
     @time_logs = @date.time_logs.order("start_time ASC")
 
     if params[:time_log_id]
